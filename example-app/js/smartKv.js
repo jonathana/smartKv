@@ -26,6 +26,7 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
       };
     });
 })(angular);
+
 (function (angular) {
   'use strict';
   angular.module('smartKv.kv', ['smartKv.directives', 'smartKv.templates'])

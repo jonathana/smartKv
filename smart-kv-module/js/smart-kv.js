@@ -16,6 +16,7 @@
       };
     });
 })(angular);
+
 (function (angular) {
   'use strict';
   angular.module('smartKv.kv', ['smartKv.directives', 'smartKv.templates'])

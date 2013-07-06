@@ -86,6 +86,13 @@ module.exports = function (grunt) {
           '<%= pkg.directories.example %>/img/{,*/}*.{png,jpg,jpeg,webp,gif}'
         ],
         tasks: ['livereload']
+      },
+      rebuild: {
+        files: [
+          '<%= pkg.main %>/js/{,*}*.js',
+          '<%= pkg.main %>/partials/{,*}*.html'
+        ],
+        tasks: ['build', 'copy:refApp', 'livereload']
       }
     },
     connect: {
