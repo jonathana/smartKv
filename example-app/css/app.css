@@ -29,3 +29,8 @@
     padding: 0;
 }
 
+.smart-kv {
+    border-color: black;
+    border-width: 5px;
+    border-style: solid;
+}

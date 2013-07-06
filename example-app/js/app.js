@@ -11,6 +11,7 @@ var app = angular.module('myApp', ['smartKv.kv']).
             ];
 
             scope.globalConfig = {
+              legend: 'My Smart-KV Table'
             };
 
         }])

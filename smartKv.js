@@ -4,7 +4,14 @@ angular.module('smartKv.templates', ['partials/smartKv_outer.html']);
 
 angular.module('partials/smartKv_outer.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put('partials/smartKv_outer.html',
-    '<div class="smart-kv container"><h2>bar</h2></div>\n' +
+    '<div class="smart-kv container">\n' +
+    '  <h2 ng-hide="legend === \"\"">{{ legend }}</h2>\n' +
+    '  <div ng-repeat="property in propertiesCollection" ng-class="{useFluid ? \'row-fluid\' : \'fluid\'}"\n' +
+    '      class="smart-kv-property-row" style="border: 2px solid #00f; padding: 2px">\n' +
+    '    <div class="span4" style="border: 2px solid #0ff; padding: 2px"><div class="pull-right">Label</div></div>\n' +
+    '    <div class="span8" style="border:2px solid #f0f; padding: 2px"><div class="pull-left">Value</div></div>\n' +
+    '  </div>\n' +
+    '</div>\n' +
     '');
 }]);
 
@@ -13,7 +20,7 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
 (function (angular) {
   'use strict';
   angular.module('smartKv.directives', ['smartKv.templates'])
-    .directive('smartKv', function () {
+    .directive('smartKv', ['DefaultKvConfiguration', function (defaultConfig) {
       return {
         restrict: 'EA',
         scope: {
@@ -22,16 +29,41 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
           config: '='
         },
         replace: 'true',
-        templateUrl: 'partials/smartKv_outer.html'
+        templateUrl: 'partials/smartKv_outer.html',
+        controller: 'TableCtrl',
+        link: function (scope, element, attr, ctrl) {
+
+          scope.$watch('config', function (config) {
+            var newConfig = angular.extend({}, defaultConfig, config);
+
+            ctrl.setGlobalConfig(newConfig);
+          }, true);
+        }
       };
-    });
+    }]);
 })(angular);
 
 (function (angular) {
   'use strict';
   angular.module('smartKv.kv', ['smartKv.directives', 'smartKv.templates'])
   .constant('DefaultKvConfiguration', {
-    defaultStyleName: 'smart-kv'
-    //just to remind available option
-  });
+    defaultStyleName: 'smart-kv',
+    labelWidth: 4,
+    valueWidth: 4,
+    legend: ''
+  })
+  .controller('TableCtrl', ['$scope', 'DefaultKvConfiguration', function (scope, defaultConfig) {
+
+    scope.columns = [];
+    scope.dataCollection = scope.dataCollection || [];
+
+    /**
+  * set the config (config parameters will be available through scope
+  * @param config
+  */
+    this.setGlobalConfig = function (config) {
+      angular.extend(scope, defaultConfig, config);
+    };
+
+  }]);
 })(angular);
