@@ -8,7 +8,7 @@
         restrict: 'EA',
         scope: {
           propertiesCollection: '=properties',
-          dataObject: '=dataObject',
+          source: '=',
           config: '='
         },
         replace: 'true',
@@ -21,6 +21,10 @@
 
             ctrl.setGlobalConfig(newConfig);
           }, true);
+
+          scope.$watch('dataObject', function () {
+            ctrl.setSourceObject(scope.source);
+          }, true);
         }
       };
     }]);
@@ -30,15 +34,15 @@
   'use strict';
   angular.module('smartKv.kv', ['smartKv.directives', 'smartKv.templates'])
   .constant('DefaultKvConfiguration', {
-    defaultStyleName: 'smart-kv',
     labelWidth: 4,
-    valueWidth: 4,
-    legend: ''
+    totalWidth: 10,
+    legend: '',
+    defaultCellValue: '\u00A0'
   })
   .controller('TableCtrl', ['$scope', 'DefaultKvConfiguration', function (scope, defaultConfig) {
 
-    scope.columns = [];
-    scope.dataCollection = scope.dataCollection || [];
+    scope.objectProperties = [];
+    scope.sourceObject = scope.sourceObject || {};
 
     /**
   * set the config (config parameters will be available through scope
@@ -46,7 +50,14 @@
   */
     this.setGlobalConfig = function (config) {
       angular.extend(scope, defaultConfig, config);
+      scope.bsRowClass = scope.rowFluid ? 'row-fluid' : 'row';
+      scope.bsRowWidthClass = 'span' + scope.totalWidth.toString();
+      scope.bsLabelWidthClass = 'span' + scope.labelWidth.toString();
+      scope.bsValueWidthClass = 'span' + (scope.totalWidth - scope.labelWidth).toString();
     };
 
+    this.setSourceObject = function setSourceObject (srcObj) {
+      scope.sourceObject = srcObj;
+    };
   }]);
 })(angular);

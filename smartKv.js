@@ -5,12 +5,12 @@ angular.module('smartKv.templates', ['partials/smartKv_outer.html']);
 angular.module('partials/smartKv_outer.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put('partials/smartKv_outer.html',
     '<div class="smart-kv container">\n' +
-    '  <h2 ng-hide="legend === \"\"">{{ legend }}</h2>\n' +
-    '  <div ng-repeat="property in propertiesCollection" ng-class="{useFluid ? \'row-fluid\' : \'fluid\'}"\n' +
-    '      class="smart-kv-property-row" style="border: 2px solid #00f; padding: 2px">\n' +
-    '    <div class="span4" style="border: 2px solid #0ff; padding: 2px"><div class="pull-right">Label</div></div>\n' +
-    '    <div class="span8" style="border:2px solid #f0f; padding: 2px"><div class="pull-left">Value</div></div>\n' +
-    '  </div>\n' +
+    '    <h2 ng-hide="legend === \"\"">{{ legend }}</h2>\n' +
+    '    <div ng-repeat="property in propertiesCollection" ng-class="bsRowClass"\n' +
+    '        class="smart-kv-row">\n' +
+    '      <div class="smart-kv-label" ng-class="bsLabelWidthClass"><div class="pull-right">{{ property.label }}</div></div>\n' +
+    '      <div class="smart-kv-value" ng-class="bsValueWidthClass"><div class="pull-left">{{ sourceObject[property.map] || defaultCellValue }}</div></div>\n' +
+    '    </div>\n' +
     '</div>\n' +
     '');
 }]);
@@ -25,7 +25,7 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
         restrict: 'EA',
         scope: {
           propertiesCollection: '=properties',
-          dataObject: '=dataObject',
+          source: '=',
           config: '='
         },
         replace: 'true',
@@ -38,6 +38,10 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
 
             ctrl.setGlobalConfig(newConfig);
           }, true);
+
+          scope.$watch('dataObject', function () {
+            ctrl.setSourceObject(scope.source);
+          }, true);
         }
       };
     }]);
@@ -47,15 +51,15 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
   'use strict';
   angular.module('smartKv.kv', ['smartKv.directives', 'smartKv.templates'])
   .constant('DefaultKvConfiguration', {
-    defaultStyleName: 'smart-kv',
     labelWidth: 4,
-    valueWidth: 4,
-    legend: ''
+    totalWidth: 10,
+    legend: '',
+    defaultCellValue: '\u00A0'
   })
   .controller('TableCtrl', ['$scope', 'DefaultKvConfiguration', function (scope, defaultConfig) {
 
-    scope.columns = [];
-    scope.dataCollection = scope.dataCollection || [];
+    scope.objectProperties = [];
+    scope.sourceObject = scope.sourceObject || {};
 
     /**
   * set the config (config parameters will be available through scope
@@ -63,7 +67,14 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
   */
     this.setGlobalConfig = function (config) {
       angular.extend(scope, defaultConfig, config);
+      scope.bsRowClass = scope.rowFluid ? 'row-fluid' : 'row';
+      scope.bsRowWidthClass = 'span' + scope.totalWidth.toString();
+      scope.bsLabelWidthClass = 'span' + scope.labelWidth.toString();
+      scope.bsValueWidthClass = 'span' + (scope.totalWidth - scope.labelWidth).toString();
     };
 
+    this.setSourceObject = function setSourceObject (srcObj) {
+      scope.sourceObject = srcObj;
+    };
   }]);
 })(angular);
