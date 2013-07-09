@@ -1,8 +1,8 @@
 <div class="smart-kv container">
-    <h2 ng-hide="legend === \"\"">{{ legend }}</h2>
+    <legend class="smart-kv-legend" ng-hide="legend === \"\"">{{ legend }}</legend>
     <div ng-repeat="property in propertiesCollection" ng-class="bsRowClass"
-        class="smart-kv-row">
-      <div class="smart-kv-label {{ bsLabelWidthClass }}"><div class="pull-right">{{ property.label }}</div></div>
-      <div class="smart-kv-value {{ bsValueWidthClass }}"><div class="smart-kv-value-holder pull-left"></div></div>
+        class="smart-kv-row {{ kvRowClass }}">
+      <div class="smart-kv-label {{ bsLabelWidthClass }}"><div class="{{ kvLabelClass }}">{{ property.label }}</div></div>
+      <div class="smart-kv-value {{ bsValueWidthClass }}"><div class="smart-kv-value-holder {{ kvValueClass }}"></div></div>
     </div>
 </div>

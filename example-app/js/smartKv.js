@@ -115,11 +115,11 @@ angular.module('smartKv.templates', ['partials/smartKv_outer.html']);
 angular.module('partials/smartKv_outer.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put('partials/smartKv_outer.html',
     '<div class="smart-kv container">\n' +
-    '    <h2 ng-hide="legend === \"\"">{{ legend }}</h2>\n' +
+    '    <legend class="smart-kv-legend" ng-hide="legend === \"\"">{{ legend }}</legend>\n' +
     '    <div ng-repeat="property in propertiesCollection" ng-class="bsRowClass"\n' +
-    '        class="smart-kv-row">\n' +
-    '      <div class="smart-kv-label {{ bsLabelWidthClass }}"><div class="pull-right">{{ property.label }}</div></div>\n' +
-    '      <div class="smart-kv-value {{ bsValueWidthClass }}"><div class="smart-kv-value-holder pull-left"></div></div>\n' +
+    '        class="smart-kv-row {{ kvRowClass }}">\n' +
+    '      <div class="smart-kv-label {{ bsLabelWidthClass }}"><div class="{{ kvLabelClass }}">{{ property.label }}</div></div>\n' +
+    '      <div class="smart-kv-value {{ bsValueWidthClass }}"><div class="smart-kv-value-holder {{ kvValueClass }}"></div></div>\n' +
     '    </div>\n' +
     '</div>\n' +
     '');
@@ -180,7 +180,10 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
     labelWidth: 4,
     totalWidth: 10,
     legend: '',
-    defaultCellValue: '\u00A0'
+    defaultCellValue: '\u00A0',
+    defaultKvLabelClass: 'pull-right',
+    defaultKvValueClass: 'pull-left',
+    defaultKvRowClass: ''
   })
   .controller('TableCtrl', ['$scope', '$log', 'DefaultKvConfiguration', function (scope, log, defaultConfig) {
 
@@ -198,6 +201,9 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
       scope.bsRowWidthClass = 'span' + scope.totalWidth.toString();
       scope.bsLabelWidthClass = 'span' + scope.labelWidth.toString();
       scope.bsValueWidthClass = 'span' + (scope.totalWidth - scope.labelWidth).toString();
+      scope.kvRowClass = scope.kvRowClass || scope.defaultKvRowClass;
+      scope.kvValueClass = scope.kvValueClass || scope.defaultKvValueClass;
+      scope.kvLabelClass = scope.kvLabelClass || scope.defaultKvLabelClass;
     };
 
     this.setSourceObject = function setSourceObject (srcObj) {

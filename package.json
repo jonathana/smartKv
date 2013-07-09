@@ -1,6 +1,6 @@
 {
     "name": "smartKv",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "a 2-column JSON key/value dumper for angularJS inspired by Lorenzo Fox's Smart-Table",
     "main": "smart-kv-module",
     "directories": {

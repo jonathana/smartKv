@@ -7,7 +7,10 @@
     labelWidth: 4,
     totalWidth: 10,
     legend: '',
-    defaultCellValue: '\u00A0'
+    defaultCellValue: '\u00A0',
+    defaultKvLabelClass: 'pull-right',
+    defaultKvValueClass: 'pull-left',
+    defaultKvRowClass: ''
   })
   .controller('TableCtrl', ['$scope', '$log', 'DefaultKvConfiguration', function (scope, log, defaultConfig) {
 
@@ -25,6 +28,9 @@
       scope.bsRowWidthClass = 'span' + scope.totalWidth.toString();
       scope.bsLabelWidthClass = 'span' + scope.labelWidth.toString();
       scope.bsValueWidthClass = 'span' + (scope.totalWidth - scope.labelWidth).toString();
+      scope.kvRowClass = scope.kvRowClass || scope.defaultKvRowClass;
+      scope.kvValueClass = scope.kvValueClass || scope.defaultKvValueClass;
+      scope.kvLabelClass = scope.kvLabelClass || scope.defaultKvLabelClass;
     };
 
     this.setSourceObject = function setSourceObject (srcObj) {
