@@ -1,0 +1,10 @@
+{
+  "name": "smartKv",
+  "version": "0.0.2",
+  "main": "smartKv.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}
