@@ -11,9 +11,9 @@ var app = angular.module('myApp', ['smartKv.kv']).
 
       scope.propertiesCollection = [
         {label: 'Random String', map: 'foo'},
-        {label: 'An integer', map: 'bar'},
+        {label: 'An integer', map: 'bar', formatFunction: 'currency', formatParameter: '$'},
         {label: 'Not here', map: 'notPresent'},
-        {label: 'A specific date', map: 'foobar'}
+        {label: 'A specific date', map: 'foobar', formatFunction: 'date', formatParameter: 'short'}
       ];
 
       scope.globalConfig = {

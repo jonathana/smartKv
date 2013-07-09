@@ -2,47 +2,18 @@
 
 (function (angular) {
   'use strict';
-  angular.module('smartKv.directives', ['smartKv.templates'])
-    .directive('smartKv', ['DefaultKvConfiguration', function (defaultConfig) {
-      return {
-        restrict: 'EA',
-        scope: {
-          propertiesCollection: '=properties',
-          source: '=',
-          config: '='
-        },
-        replace: 'true',
-        templateUrl: 'partials/smartKv_outer.html',
-        controller: 'TableCtrl',
-        link: function (scope, element, attr, ctrl) {
-
-          scope.$watch('config', function (config) {
-            var newConfig = angular.extend({}, defaultConfig, config);
-
-            ctrl.setGlobalConfig(newConfig);
-          }, true);
-
-          scope.$watch('dataObject', function () {
-            ctrl.setSourceObject(scope.source);
-          }, true);
-        }
-      };
-    }]);
-})(angular);
-
-(function (angular) {
-  'use strict';
-  angular.module('smartKv.kv', ['smartKv.directives', 'smartKv.templates'])
+  angular.module('smartKv.kv', ['smartKv.directives', 'smartKv.templates', 'smartKv.filters'])
   .constant('DefaultKvConfiguration', {
     labelWidth: 4,
     totalWidth: 10,
     legend: '',
     defaultCellValue: '\u00A0'
   })
-  .controller('TableCtrl', ['$scope', 'DefaultKvConfiguration', function (scope, defaultConfig) {
+  .controller('TableCtrl', ['$scope', '$log', 'DefaultKvConfiguration', function (scope, log, defaultConfig) {
 
     scope.objectProperties = [];
     scope.sourceObject = scope.sourceObject || {};
+    angular.extend(scope, defaultConfig);
 
     /**
   * set the config (config parameters will be available through scope
@@ -58,6 +29,10 @@
 
     this.setSourceObject = function setSourceObject (srcObj) {
       scope.sourceObject = srcObj;
+    };
+
+    this.setObjectProperties = function setObjectProperties(propsCollection) {
+      scope.objectProperties = propsCollection;
     };
   }]);
 })(angular);

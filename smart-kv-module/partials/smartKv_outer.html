@@ -2,7 +2,7 @@
     <h2 ng-hide="legend === \"\"">{{ legend }}</h2>
     <div ng-repeat="property in propertiesCollection" ng-class="bsRowClass"
         class="smart-kv-row">
-      <div class="smart-kv-label" ng-class="bsLabelWidthClass"><div class="pull-right">{{ property.label }}</div></div>
-      <div class="smart-kv-value" ng-class="bsValueWidthClass"><div class="pull-left">{{ sourceObject[property.map] || defaultCellValue }}</div></div>
+      <div class="smart-kv-label {{ bsLabelWidthClass }}"><div class="pull-right">{{ property.label }}</div></div>
+      <div class="smart-kv-value {{ bsValueWidthClass }}"><div class="smart-kv-value-holder pull-left"></div></div>
     </div>
 </div>
