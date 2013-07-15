@@ -6,13 +6,12 @@
   .constant('DefaultKvConfiguration', {
     labelWidth: 4,
     totalWidth: 10,
-    legend: '',
     defaultCellValue: '\u00A0',
     defaultKvLabelClass: 'pull-right',
     defaultKvValueClass: 'pull-left',
     defaultKvRowClass: ''
   })
-  .controller('TableCtrl', ['$scope', '$log', 'DefaultKvConfiguration', function (scope, log, defaultConfig) {
+  .controller('TableCtrl', ['$scope', 'DefaultKvConfiguration', function (scope, defaultConfig) {
 
     scope.objectProperties = [];
     scope.sourceObject = scope.sourceObject || {};
@@ -25,7 +24,6 @@
     this.setGlobalConfig = function (config) {
       angular.extend(scope, defaultConfig, config);
       scope.bsRowClass = scope.rowFluid ? 'row-fluid' : 'row';
-      scope.bsRowWidthClass = 'span' + scope.totalWidth.toString();
       scope.bsLabelWidthClass = 'span' + scope.labelWidth.toString();
       scope.bsValueWidthClass = 'span' + (scope.totalWidth - scope.labelWidth).toString();
       scope.kvRowClass = scope.kvRowClass || scope.defaultKvRowClass;
@@ -39,6 +37,10 @@
 
     this.setObjectProperties = function setObjectProperties(propsCollection) {
       scope.objectProperties = propsCollection;
+    };
+
+    this.getSourceObject = function getSourceObject () {
+      return scope.sourceObject;
     };
   }]);
 })(angular);

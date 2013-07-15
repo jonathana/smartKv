@@ -19,6 +19,7 @@
 
             var newConfig = angular.extend({}, defaultConfig, scope.config);
             ctrl.setGlobalConfig(newConfig);
+            ctrl.setSourceObject(scope.sourceObject);
 
             scope.$watch('config', function (config) {
               var newConfig = angular.extend({}, defaultConfig, config);
@@ -27,12 +28,13 @@
             }, true);
 
             scope.$watch('dataObject.keys.length', function () {
-              ctrl.setSourceObject(scope.source);
+              ctrl.setSourceObject(scope.sourceObject);
             }, true);
 
             scope.$watch('propertiesCollection.length', function(){
               ctrl.setObjectProperties(scope.propertiesCollection);
             }, true);
+
           }
         };
       }])
@@ -44,10 +46,10 @@
           require: '^smartKv',
           scope: true,
           replace: true,
-          link: function (scope, element) {
+          link: function (scope, element, attr, ctrl) {
             var
                 valueProperty = scope.property,
-                sourceObject = scope.sourceObject,
+                sourceObject = ctrl.getSourceObject(),
                 format = filter('format'),
                 childScope;
 
@@ -185,7 +187,7 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
     defaultKvValueClass: 'pull-left',
     defaultKvRowClass: ''
   })
-  .controller('TableCtrl', ['$scope', '$log', 'DefaultKvConfiguration', function (scope, log, defaultConfig) {
+  .controller('TableCtrl', ['$scope', 'DefaultKvConfiguration', function (scope, defaultConfig) {
 
     scope.objectProperties = [];
     scope.sourceObject = scope.sourceObject || {};
@@ -212,6 +214,10 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
 
     this.setObjectProperties = function setObjectProperties(propsCollection) {
       scope.objectProperties = propsCollection;
+    };
+
+    this.getSourceObject = function getSourceObject () {
+      return scope.sourceObject;
     };
   }]);
 })(angular);

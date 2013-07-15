@@ -19,7 +19,7 @@ var app = angular.module('myApp', ['smartKv.kv']).
       scope.globalConfig = {
         legend: 'My Smart-KV Table',
         defaultCellValue: 'N/A',
-        valueClass: 'pull-right'
+        kvValueClass: 'pull-right'
       };
 
     }])

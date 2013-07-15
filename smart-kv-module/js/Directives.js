@@ -10,7 +10,9 @@
           scope: {
             propertiesCollection: '=properties',
             sourceObject: '=source',
-            config: '='
+            config: '=',
+            kvTitle: '=',
+            kvClass: '='
           },
           replace: 'false',
           templateUrl: 'partials/smartKv_outer.html',
@@ -19,6 +21,7 @@
 
             var newConfig = angular.extend({}, defaultConfig, scope.config);
             ctrl.setGlobalConfig(newConfig);
+            ctrl.setSourceObject(scope.sourceObject);
 
             scope.$watch('config', function (config) {
               var newConfig = angular.extend({}, defaultConfig, config);
@@ -27,12 +30,13 @@
             }, true);
 
             scope.$watch('dataObject.keys.length', function () {
-              ctrl.setSourceObject(scope.source);
+              ctrl.setSourceObject(scope.sourceObject);
             }, true);
 
             scope.$watch('propertiesCollection.length', function(){
               ctrl.setObjectProperties(scope.propertiesCollection);
             }, true);
+
           }
         };
       }])
@@ -44,10 +48,10 @@
           require: '^smartKv',
           scope: true,
           replace: true,
-          link: function (scope, element) {
+          link: function (scope, element, attr, ctrl) {
             var
                 valueProperty = scope.property,
-                sourceObject = scope.sourceObject,
+                sourceObject = ctrl.getSourceObject(),
                 format = filter('format'),
                 childScope;
 
