@@ -1,7 +1,7 @@
 <div class="smart-kv {{ kvClass }}">
     <legend class="smart-kv-legend" ng-hide="kvTitle === \"\"">{{ kvTitle }}</legend>
     <div ng-repeat="property in propertiesCollection"
-        class="smart-kv-row {{kvRowClass}} {{property.kvRowClass}} {{ bsRowClass }}">
+        class="smart-kv-row {{kvRowClass}} {{ bsRowClass }} {{property.kvRowClass}}">
       <div class="smart-kv-label {{ bsLabelWidthClass }}"><div class="{{ kvLabelClass }}">{{ property.label }}</div></div>
       <div class="smart-kv-value {{ bsValueWidthClass }}"><div class="smart-kv-value-holder {{ kvValueClass }}"></div></div>
     </div>

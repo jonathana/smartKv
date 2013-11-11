@@ -16,7 +16,7 @@
           },
           replace: 'false',
           templateUrl: 'partials/smartKv_outer.html',
-          controller: 'TableCtrl',
+          controller: 'KvCntl',
           link: function (scope, element, attr, ctrl) {
 
             var newConfig = angular.extend({}, defaultConfig, scope.config);

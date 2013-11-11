@@ -7,7 +7,7 @@ angular.module('partials/smartKv_outer.html', []).run(['$templateCache', functio
     '<div class="smart-kv {{ kvClass }}">\n' +
     '    <legend class="smart-kv-legend" ng-hide="kvTitle === \"\"">{{ kvTitle }}</legend>\n' +
     '    <div ng-repeat="property in propertiesCollection"\n' +
-    '        class="smart-kv-row {{kvRowClass}} {{property.kvRowClass}} {{ bsRowClass }}">\n' +
+    '        class="smart-kv-row {{kvRowClass}} {{ bsRowClass }} {{property.kvRowClass}}">\n' +
     '      <div class="smart-kv-label {{ bsLabelWidthClass }}"><div class="{{ kvLabelClass }}">{{ property.label }}</div></div>\n' +
     '      <div class="smart-kv-value {{ bsValueWidthClass }}"><div class="smart-kv-value-holder {{ kvValueClass }}"></div></div>\n' +
     '    </div>\n' +

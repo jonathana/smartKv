@@ -1,39 +1,47 @@
 {
-    "name": "smartKv",
-    "version": "0.0.3",
-    "description": "a 2-column JSON key/value dumper for angularJS inspired by Lorenzo Fox's Smart-Table",
-    "main": "smart-kv-module",
-    "directories": {
-        "test": "test",
-        "example": "example-app"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jonathana/smartKv.git"
-    },
-    "keywords": [
-        "table",
-        "key-value",
-        "json",
-        "angularjs"
-    ],
-    "author": "Jonathan Altman",
-    "license": "MIT",
-    "readmeFilename": "README.md",
-    "devDependencies": {
-        "grunt": "~0.4",
-        "grunt-regarde": "~0.1.1",
-        "grunt-contrib-concat": "~0.3",
-        "grunt-contrib-clean": "~0.4",
-        "grunt-html2js": "~0.1",
-        "grunt-contrib-copy": "~0.4",
-        "grunt-contrib-uglify": "~0.2",
-        "grunt-contrib-jshint": "~0.3.0",
-        "grunt-contrib-connect": "~0.2.0",
-        "grunt-contrib-livereload": "~0.1.2",
-        "grunt-contrib-connect": "~0.2.0",
-        "grunt-open": "~0.2.0",
-        "matchdep": "~0.1.1",
-        "grunt-regex-replace": "~0.2"
-    }
+  "name": "smartKv",
+  "version": "0.0.3",
+  "description": "a 2-column JSON key/value dumper for angularJS inspired by Lorenzo Fox's Smart-Table",
+  "main": "smart-kv-module",
+  "directories": {
+    "test": "test",
+    "example": "example-app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathana/smartKv.git"
+  },
+  "keywords": [
+    "table",
+    "key-value",
+    "json",
+    "angularjs"
+  ],
+  "author": "Jonathan Altman",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "grunt": "~0.4",
+    "grunt-regarde": "~0.1.1",
+    "grunt-contrib-concat": "~0.3",
+    "grunt-contrib-clean": "~0.4",
+    "grunt-html2js": "~0.1",
+    "grunt-contrib-copy": "~0.4",
+    "grunt-contrib-uglify": "~0.2",
+    "grunt-contrib-jshint": "~0.3.0",
+    "grunt-contrib-connect": "~0.2.0",
+    "grunt-contrib-livereload": "~0.1.2",
+    "grunt-open": "~0.2.0",
+    "matchdep": "~0.1.1",
+    "grunt-regex-replace": "~0.2",
+    "karma-script-launcher": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-jasmine": "~0.1.3",
+    "karma-requirejs": "~0.1.0",
+    "karma-coffee-preprocessor": "~0.1.0",
+    "karma-phantomjs-launcher": "~0.1.0",
+    "karma": "~0.10.2"
+  }
 }

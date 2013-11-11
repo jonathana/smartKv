@@ -11,7 +11,7 @@
     defaultKvValueClass: 'pull-left',
     defaultKvRowClass: ''
   })
-  .controller('TableCtrl', ['$scope', 'DefaultKvConfiguration', function (scope, defaultConfig) {
+  .controller('KvCntl', ['$scope', 'DefaultKvConfiguration', function (scope, defaultConfig) {
 
     scope.objectProperties = [];
     scope.sourceObject = scope.sourceObject || {};
